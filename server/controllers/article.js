@@ -1,5 +1,6 @@
 const ArticleModel = require('../modules/article')
 
+
 class articleController {
     /**
      * 创建文章
@@ -7,12 +8,10 @@ class articleController {
      * @returns {Promise.<void>}
      */
     static async create(ctx) {
+
         // 接收客服端
         let req = ctx.request.body;
         if (req.title // 文章标题
-            && req.author // 文章作者
-            && req.content // 文章内容
-            && req.category // 文章分类
         ) {
             try {
                 // 创建文章模型

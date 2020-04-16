@@ -7,6 +7,15 @@ const GrowLog = Sequelize.import('../schema/grow-log.js');
 // 自动创建表
 GrowLog.sync({force: false});
 
+formatDate = (date) => {  
+    var y = date.getFullYear();  
+    var m = date.getMonth() + 1;  
+    m = m < 10 ? '0' + m : m;  
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    return y + '-' + m + '-' + d;  
+};  
+
 class GrowLogModel {
     /**
      * 创建文章模型
@@ -16,8 +25,9 @@ class GrowLogModel {
     static async createGrowLog(data) {
         return await GrowLog.create({
             title: data.title, // 文章标题
-            author: data.author, // 文章作者
-            content: data.content, // 文章内容
+            img: data.img, // 文章作者
+            content: data.content, // 文章内容,
+            time:formatDate(new Date())
         })
     }
 
@@ -31,6 +41,47 @@ class GrowLogModel {
             where: {
                 id,
             },
+        })
+    }
+
+    /**
+     * 查询取日记列表
+     * @param id  文章ID
+     * @returns {Promise<Model>}
+     */
+    static async getGrowLogList() {
+        return await GrowLog.findAll({
+        })
+    }
+
+    
+    /**
+     * 删除日记
+     * @param id  文章ID
+     * @returns {Promise<Model>}
+     */
+    static async deletetGrowLog(id) {
+        return await GrowLog.destroy({
+            where: {
+                id,
+            },
+        })
+    }
+
+     /**
+     * 更新日记
+     * @param id  文章ID
+     * @returns {Promise<Model>}
+     */
+    static async updateGrowLog(id,query) {
+        return await GrowLog.update({
+            title: query.title,  
+            img: query.img,    
+            content: query.content
+        },{
+            where: {      
+                id    
+            }   
         })
     }
 }
