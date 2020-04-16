@@ -25,7 +25,6 @@ class growLogController {
     static async create(ctx) {
         // 接收客服端
         let req = ctx.request.body;
-        console.log('-----------11111111111111----------',req.img)
 
         if (req.title // 文章标题
             && req.img // 文章作者
@@ -89,7 +88,8 @@ class growLogController {
      * @returns {Promise.<void>}
      */
     static async detail(ctx) {
-        let id = ctx.params.id;
+        let id = ctx.query.id;
+        console.log(ctx.query.id)
         if (id) {
             try {
                 // 查询文章详情模型
@@ -102,6 +102,7 @@ class growLogController {
                 }
 
             } catch (err) {
+                console.log(err)
                 ctx.response.status = 400;
                 ctx.body = {
                     code: 400,
@@ -109,10 +110,12 @@ class growLogController {
                 }
             }
         } else {
-            ctx.response.status = 416;
+            let data = await GrowLogModel.getGrowLogList();
+            ctx.response.status = 200;
             ctx.body = {
-                code: 416,
-                msg: '文章ID必须传'
+                code: 200,
+                msg: '文章ID必须传',
+                data
             }
         }
     }

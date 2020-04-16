@@ -22,5 +22,6 @@ const sequelize = new Sequelize('graduation', 'root', 'dx971121', {
 });
 
 module.exports = {
-    sequelize
+    sequelize,
+    Sequelize
 }

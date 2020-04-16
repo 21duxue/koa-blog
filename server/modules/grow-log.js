@@ -2,6 +2,7 @@
 const db = require('../config/db');
 // 引入Sequelize对象
 const Sequelize = db.sequelize;
+const Op = db.Sequelize.Op
 // 引入上一步的文章数据表模型文件
 const GrowLog = Sequelize.import('../schema/grow-log.js');
 // 自动创建表
@@ -36,10 +37,12 @@ class GrowLogModel {
      * @param id  文章ID
      * @returns {Promise<Model>}
      */
-    static async getGrowLogDetail(id) {
-        return await GrowLog.findOne({
+    static async getGrowLogDetail(title) {
+        return await GrowLog.findAll({
             where: {
-                id,
+                title:{
+                    [Op.like]:'%'+title+"%"
+                }
             },
         })
     }
