@@ -18,6 +18,7 @@ const cors = require('koa-cors');
 const index = require('./routes/index')
 const users = require('./routes/users')
 const growLog = require('./routes/grow-log')
+const articlList = require('./routes/article-list')
 
 // error handler
 onerror(app)
@@ -68,10 +69,10 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+// app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(growLog.routes(),growLog.allowedMethods())
-
+app.use(articlList.routes(),articlList.allowedMethods())
 
 
 
