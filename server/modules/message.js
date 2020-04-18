@@ -4,7 +4,7 @@ const db = require('../config/db');
 const Sequelize = db.sequelize;
 const Op = db.Sequelize.Op
 // 引入上一步的文章数据表模型文件
-const GrowLog = Sequelize.import('../schema/grow-log.js');
+const GrowLog = Sequelize.import('../schema/message.js');
 // 自动创建表
 GrowLog.sync({force: false});
 
@@ -28,7 +28,9 @@ class GrowLogModel {
             title: data.title, // 文章标题
             img: data.img, // 文章作者
             content: data.content, // 文章内容,
-            time:formatDate(new Date())
+            remark:data.remark,
+            sort_id:data.sort_id,
+            click_num:0,
         })
     }
 
@@ -47,7 +49,7 @@ class GrowLogModel {
         })
     }
 
-     /**
+      /**
      * 查询取文章详情数据
      * @param id  文章ID
      * @returns {Promise<Model>}
@@ -91,9 +93,7 @@ class GrowLogModel {
      */
     static async updateGrowLog(id,query) {
         return await GrowLog.update({
-            title: query.title,  
-            img: query.img,    
-            content: query.content
+            disable:query.disable
         },{
             where: {      
                 id    

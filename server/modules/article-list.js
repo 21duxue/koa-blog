@@ -28,7 +28,9 @@ class GrowLogModel {
             title: data.title, // 文章标题
             img: data.img, // 文章作者
             content: data.content, // 文章内容,
-            time:formatDate(new Date())
+            remark:data.remark,
+            sort_id:data.sort_id,
+            click_num:0,
         })
     }
 
@@ -43,6 +45,19 @@ class GrowLogModel {
                 title:{
                     [Op.like]:'%'+title+"%"
                 }
+            },
+        })
+    }
+
+      /**
+     * 查询取文章详情数据
+     * @param id  文章ID
+     * @returns {Promise<Model>}
+     */
+    static async getGrowLogDetailById(id) {
+        return await GrowLog.findAll({
+            where: {
+                id
             },
         })
     }
@@ -80,7 +95,10 @@ class GrowLogModel {
         return await GrowLog.update({
             title: query.title,  
             img: query.img,    
-            content: query.content
+            content: query.content,
+            remark:query.remark,
+            sort_id:query.sort_id,
+            click_num:query.click_num > 0? query.click_num : 0
         },{
             where: {      
                 id    

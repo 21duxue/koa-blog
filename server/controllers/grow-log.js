@@ -93,7 +93,7 @@ class growLogController {
         if (id) {
             try {
                 // 查询文章详情模型
-                let data = await GrowLogModel.getGrowLogDetail(id);
+                let data = await GrowLogModel.getGrowLogDetailById(id);
                 ctx.response.status = 200;
                 ctx.body = {
                     code: 200,

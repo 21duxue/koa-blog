@@ -15,7 +15,7 @@ const cors = require('koa-cors');
 
 
 
-const index = require('./routes/index')
+const Message = require('./routes/message')
 const users = require('./routes/users')
 const growLog = require('./routes/grow-log')
 const articlList = require('./routes/article-list')
@@ -73,6 +73,7 @@ app.use(async (ctx, next) => {
 app.use(users.routes(), users.allowedMethods())
 app.use(growLog.routes(),growLog.allowedMethods())
 app.use(articlList.routes(),articlList.allowedMethods())
+app.use(Message.routes(),Message.allowedMethods())
 
 
 

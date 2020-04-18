@@ -1,4 +1,4 @@
-const ArticleListModel = require('../modules/article-list')
+const ArticleListModel = require('../modules/message')
 const fs = require('fs')
 
 function delDir(path){

@@ -1,7 +1,7 @@
 const moment = require('moment');
 module.exports = function (sequelize, DataTypes) {
-    return sequelize.define('article-list', {
-        // 文章ID
+    return sequelize.define('message', {
+        // 访客ID
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -9,16 +9,10 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true,
         },
         // 文章标题
-        title: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
-            field: 'title',
-        },
-        // 分类id
-        sort_id: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'sort_id'
+            field: 'name',
         },
         // 文章内容
         content: {
@@ -26,20 +20,15 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             field: 'content'
         },
-        remark: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'remark'
-        },
         img: {
             type: DataTypes.STRING,
             allowNull: false,
             field: 'img'
         },
-        click_num: {
-            type: DataTypes.STRING,
+        disable: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            field: 'click_num'
+            field: 'disable'
         },
         // 创建时间
         createdAt: {
